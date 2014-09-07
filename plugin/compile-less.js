@@ -2,6 +2,8 @@ var fs = Npm.require('fs');
 var path = Npm.require('path');
 var less = Npm.require('less');
 var Future = Npm.require('fibers/future');
+var autoprefixer = Npm.require('autoprefixer-core');
+var autoprefixerOptions = {};
 
 Plugin.registerSourceHandler("less", {archMatching: 'web'}, function (compileStep) {
   var source = compileStep.read().toString('utf8');
@@ -41,6 +43,33 @@ Plugin.registerSourceHandler("less", {archMatching: 'web'}, function (compileSte
     return;
   }
 
+  // JSON validation and parsing helper function
+  function parseOptions(options){
+    try {
+      var o = JSON.parse(options);
+      if (o && typeof o === "object" && o !== null) {
+        if (Object.keys(o)[0] !== "browsers"){
+          console.log('\n less-autoprefixer: invalid AUTOPREFIXER_OPTIONS - "browsers" key not found, falling back to default options - { browsers: "> 1%, last 2 versions, Firefox ESR, Opera 12.1"}, more info - https://github.com/postcss/autoprefixer-core#usage');
+        } else {
+          return o; 
+        }
+      }
+    }
+    catch (e) {
+      console.log("\n less-autoprefixer: invalid JSON format in AUTOPREFIXER_OPTIONS -", e)
+      console.log(' less-autoprefixer: falling back to default options - { browsers: "> 1%, last 2 versions, Firefox ESR, Opera 12.1"}, more info - https://github.com/postcss/autoprefixer-core#usage');
+    }
+    return {};
+  };
+
+  // Parse Autoprefixer options enviroment variable
+  if (process.env.AUTOPREFIXER_OPTIONS) {
+    autoprefixerOptions = parseOptions(process.env.AUTOPREFIXER_OPTIONS);
+  };
+
+
+  // Applying Autoprefixer to compiled css
+  css = autoprefixer(autoprefixerOptions).process(css).css;
 
   if (sourceMap) {
     sourceMap.sources = [compileStep.inputPath];
