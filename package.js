@@ -1,6 +1,7 @@
 Package.describe({
   summary: "The dynamic stylesheet language + Autoprefixer",
-  version: "1.0.7"
+  version: "1.0.7",
+  git: "https://github.com/lauricio/less-autoprefixer"
 });
 
 Package._transitional_registerBuildPlugin({
