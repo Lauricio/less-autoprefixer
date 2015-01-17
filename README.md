@@ -1,4 +1,4 @@
-# Less 2.2.0 + autoprefixer-core 5.0.0
+# Less 1.7.5 + autoprefixer-core 5.0.0
 
 This is a hacked native LESS package with [AutoPrefixer](https://github.com/ai/autoprefixer) support, a temporary solution until multiple source handlers are implemented in Meteor [#51](https://github.com/MeteorCommunity/discussions/issues/51).
 
