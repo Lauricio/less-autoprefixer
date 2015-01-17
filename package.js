@@ -1,4 +1,5 @@
 Package.describe({
+  name: "lauricio:less-autoprefixer",
   summary: "The dynamic stylesheet language + Autoprefixer",
   version: "1.0.12",
   git: "https://github.com/lauricio/less-autoprefixer"
