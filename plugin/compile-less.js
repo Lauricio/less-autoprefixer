@@ -51,7 +51,7 @@ Plugin.registerSourceHandler("less", {archMatching: 'web'}, function (compileSte
         if (Object.keys(o)[0] !== "browsers"){
           console.log('\n less-autoprefixer: invalid AUTOPREFIXER_OPTIONS - "browsers" key not found, falling back to default options - { browsers: "> 1%, last 2 versions, Firefox ESR, Opera 12.1"}, more info - https://github.com/postcss/autoprefixer-core#usage');
         } else {
-          return o; 
+          return o;
         }
       }
     }
