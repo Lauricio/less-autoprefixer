@@ -12,8 +12,8 @@ Package._transitional_registerBuildPlugin({
     'plugin/compile-less.js'
   ],
   npmDependencies: {
-    "less": "1.7.5",
-    "autoprefixer-core": "5.0.0"
+    "less": "2.2.0",
+    "less-plugin-autoprefix": "1.3.0"
   }
 });
 
