@@ -1,7 +1,7 @@
 Package.describe({
   name: "lauricio:less-autoprefixer",
   summary: "The dynamic stylesheet language + Autoprefixer",
-  version: "1.0.14",
+  version: "1.0.15",
   git: "https://github.com/lauricio/less-autoprefixer"
 });
 
@@ -12,7 +12,7 @@ Package._transitional_registerBuildPlugin({
     'plugin/compile-less.js'
   ],
   npmDependencies: {
-    "less": "2.2.0",
+    "less": "2.3.1",
     "less-plugin-autoprefix": "1.3.0"
   }
 });
