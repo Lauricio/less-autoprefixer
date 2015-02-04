@@ -16,11 +16,14 @@ To unset environment variable run: `unset AUTOPREFIXER_OPTIONS`
 
 If no `AUTOPREFIXER_OPTIONS` environment variable is found it fallbacks to `autoprefixer` default options: `["> 1%", "last 2 versions", "Firefox ESR", "Opera 12.1"]`
 
-For more info on `autoprefixer` options please check https://github.com/ai/autoprefixer#browsers
+For more info on `autoprefixer` options please check https://github.com/ai/browserslist#queries
 
-###From meteor less package:
+###Credits:
+[Bass Jobsen](https://github.com/bassjobsen)
 
-# less
+----
+
+### From the official meteor less package:
 
 [LESS](http://lesscss.org/) extends CSS with dynamic behavior such as variables, mixins,
 operations and functions. It allows for more compact stylesheets and
