@@ -24,7 +24,7 @@ Package.onUse(function (api) {
 
 Package.onTest(function(api) {
   api.use('lauricio:less-autoprefixer');
-  api.use(['tinytest', 'test-helpers']);
+  api.use(['tinytest', 'test-helpers','jquery']);
   api.addFiles(['tests/top.import.less',
                 'tests/top3.import.less',
                 'tests/imports/not-included.less',
