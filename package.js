@@ -35,4 +35,7 @@ Package.onTest(function(api) {
   api.addFiles('tests/top2.less', 'client', {isImport: true});
 
   api.addFiles('less_tests.js', 'client');
+
+  api.addFiles('tests/autoprefixer.less');
+  api.addFiles('autoprefixer_tests.js', 'client');
 });
