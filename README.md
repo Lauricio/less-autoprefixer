@@ -104,3 +104,6 @@ This package uses the following npm modules:
 
 ### Credits:
 [Bass Jobsen](https://github.com/bassjobsen)
+
+### LICENSE:
+MIT
