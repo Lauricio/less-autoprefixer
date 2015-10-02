@@ -23,7 +23,7 @@ Package.onUse(function (api) {
 });
 
 Package.onTest(function(api) {
-  api.use('less');
+  api.use('lauricio:less-autoprefixer');
   api.use(['tinytest', 'test-helpers']);
   api.addFiles(['tests/top.import.less',
                 'tests/top3.import.less',
