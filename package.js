@@ -13,7 +13,8 @@ Package.registerBuildPlugin({
   ],
   npmDependencies: {
     // Fork of 2.5.0, deleted large unused files in dist directory.
-    "less": "https://github.com/meteor/less.js/tarball/8130849eb3d7f0ecf0ca8d0af7c4207b0442e3f6"
+    "less": "https://github.com/meteor/less.js/tarball/8130849eb3d7f0ecf0ca8d0af7c4207b0442e3f6",
+    "less-plugin-autoprefix": "1.4.2"
   }
 });
 

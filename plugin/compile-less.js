@@ -1,6 +1,7 @@
 const path = Plugin.path;
 const less = Npm.require('less');
 const Future = Npm.require('fibers/future');
+const LessPluginAutoprefixer = Npm.require('less-plugin-autoprefix');
 
 Plugin.registerCompiler({
   // *.lessimport has been deprecated since 0.7.1, but it still works. We
@@ -45,13 +46,14 @@ class LessCompiler extends MultiFileCachingCompiler {
 
   compileOneFile(inputFile, allFiles) {
     const importPlugin = new MeteorImportLessPlugin(allFiles);
+    const autoprefixerPlugin = new LessPluginAutoprefixer(parseAutoprefixerOptions(process.env.AUTOPREFIXER_OPTIONS || 'null'));
 
     const f = new Future;
     let output;
     try {
       less.render(inputFile.getContentsAsBuffer().toString('utf8'), {
         filename: this.getAbsoluteImportPath(inputFile),
-        plugins: [importPlugin],
+        plugins: [importPlugin, autoprefixerPlugin],
         // Generate a source map, and include the source files in the
         // sourcesContent field.  (Note that source files which don't themselves
         // produce text (eg, are entirely variable definitions) won't end up in
@@ -78,11 +80,10 @@ class LessCompiler extends MultiFileCachingCompiler {
     const compileResult = {css: output.css, sourceMap: output.map};
     const referencedImportPaths = [];
     output.imports.forEach((path) => {
-      // Some files that show up in output.imports are not actually files; for
-      // example @import url("...");
-      if (allFiles.has(path)) {
-        referencedImportPaths.push(path);
+      if (! allFiles.has(path)) {
+        throw Error("Imported an unknown file?");
       }
+      referencedImportPaths.push(path);
     });
 
     return {compileResult, referencedImportPaths};
@@ -116,15 +117,8 @@ class MeteorImportLessFileManager extends less.AbstractFileManager {
   }
 
   // We want to be the only active FileManager, so claim to support everything.
-  supports(filename) {
-    // We shouldn't process files that start with `//` or a protocol because
-    // those are not relative to the app at all; they are probably native
-    // CSS imports
-    if (! filename.match(/^(https?:)?\/\//)) {
-      return true;
-    }
-
-    return false;
+  supports() {
+    return true;
   }
 
   loadFile(filename, currentDirectory, options, environment, cb) {
@@ -161,13 +155,31 @@ class MeteorImportLessFileManager extends less.AbstractFileManager {
 
 function decodeFilePath (filePath) {
   const match = filePath.match(/^{(.*)}\/(.*)$/);
-  if (! match)
-    throw new Error('Failed to decode Less path: ' + filePath);
+  if (! match){
+    return filePath;
+  }
 
   if (match[1] === '') {
     // app
     return match[2];
   }
-
   return 'packages/' + match[1] + '/' + match[2];
+}
+
+function parseAutoprefixerOptions(options) {
+  try {
+    var o = JSON.parse(options);
+    if (o && typeof o === "object" && o !== null) {
+      if (Object.keys(o)[0] !== "browsers"){
+        console.log('\n less-autoprefixer: invalid AUTOPREFIXER_OPTIONS - "browsers" key not found, falling back to default options - { browsers: "> 1%, last 2 versions, Firefox ESR, Opera 12.1"}, more info - https://github.com/postcss/autoprefixer-core#usage');
+      } else {
+        return o;
+      }
+    }
+  }
+  catch (e) {
+    console.log("\n less-autoprefixer: invalid JSON format in AUTOPREFIXER_OPTIONS -", e);
+    console.log(' less-autoprefixer: falling back to default options - { browsers: "> 1%, last 2 versions, Firefox ESR, Opera 12.1"}, more info - https://github.com/postcss/autoprefixer-core#usage');
+  }
+  return {};
 }
