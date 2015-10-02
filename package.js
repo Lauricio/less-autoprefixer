@@ -1,25 +1,37 @@
 Package.describe({
-  name: "lauricio:less-autoprefixer",
-  summary: "The dynamic stylesheet language + Autoprefixer",
-  version: "1.0.15",
-  git: "https://github.com/lauricio/less-autoprefixer"
+  name: 'lauricio:less-autoprefixer',
+  version: '2.5.0_3',
+  summary: 'Leaner CSS language + Autoprefixer',
+  documentation: 'README.md'
 });
 
-Package._transitional_registerBuildPlugin({
-  name: "compileLess",
-  use: [],
+Package.registerBuildPlugin({
+  name: "compileLessBatch",
+  use: ['caching-compiler', 'ecmascript', 'underscore'],
   sources: [
     'plugin/compile-less.js'
   ],
   npmDependencies: {
-    "less": "2.3.1",
-    "less-plugin-autoprefix": "1.3.0"
+    // Fork of 2.5.0, deleted large unused files in dist directory.
+    "less": "https://github.com/meteor/less.js/tarball/8130849eb3d7f0ecf0ca8d0af7c4207b0442e3f6"
   }
 });
 
-Package.on_test(function (api) {
-  api.use(['test-helpers', 'tinytest', 'less', 'templating']);
-  api.add_files(['less_tests.less', 'less_tests.js', 'less_tests.html',
-                 'less_tests_empty.less'],
-                'client');
+Package.onUse(function (api) {
+  api.use('isobuild:compiler-plugin@1.0.0');
+});
+
+Package.onTest(function(api) {
+  api.use('less');
+  api.use(['tinytest', 'test-helpers']);
+  api.addFiles(['tests/top.import.less',
+                'tests/top3.import.less',
+                'tests/imports/not-included.less',
+                'tests/dir/in-dir.import.less',
+                'tests/dir/in-dir2.import.less',
+                'tests/dir/root.less',
+                'tests/dir/subdir/in-subdir.import.less']);
+  api.addFiles('tests/top2.less', 'client', {isImport: true});
+
+  api.addFiles('less_tests.js', 'client');
 });
