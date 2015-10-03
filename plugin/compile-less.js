@@ -168,10 +168,10 @@ function decodeFilePath (filePath) {
 
 function parseAutoprefixerOptions(options) {
   try {
-    var o = JSON.parse(options);
+    const o = JSON.parse(options);
     if (o && typeof o === "object" && o !== null) {
       if (Object.keys(o)[0] !== "browsers"){
-        console.log('\n less-autoprefixer: invalid AUTOPREFIXER_OPTIONS - "browsers" key not found, falling back to default options - { browsers: "> 1%, last 2 versions, Firefox ESR, Opera 12.1"}, more info - https://github.com/postcss/autoprefixer-core#usage');
+        console.log('\n less-autoprefixer: invalid AUTOPREFIXER_OPTIONS - "browsers" key not found, falling back to default options - { browsers: "> 1%, last 2 versions, Firefox ESR, Opera 12.1"}, more info - https://github.com/postcss/autoprefixer#options');
       } else {
         return o;
       }
@@ -179,7 +179,7 @@ function parseAutoprefixerOptions(options) {
   }
   catch (e) {
     console.log("\n less-autoprefixer: invalid JSON format in AUTOPREFIXER_OPTIONS -", e);
-    console.log(' less-autoprefixer: falling back to default options - { browsers: "> 1%, last 2 versions, Firefox ESR, Opera 12.1"}, more info - https://github.com/postcss/autoprefixer-core#usage');
+    console.log(' less-autoprefixer: falling back to default options - { browsers: "> 1%, last 2 versions, Firefox ESR, Opera 12.1"}, more info - https://github.com/postcss/autoprefixer#options');
   }
   return {};
 }
