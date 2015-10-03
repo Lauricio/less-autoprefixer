@@ -93,8 +93,18 @@ Importing styles relative to the current package/app's root:
 @import "/path/to/style.import.less";
 ```
 
-Dependencies
-------------
+## Testing
+
+Theres an **autoprefixer-plugin** test in addition to meteor core less import test.
+Follow these steps to run the tests:
+
+```
+meteor create test-less && cd test-less
+git clone https://github.com/Lauricio/less-autoprefixer packages/lauricio:less-autoprefixer
+meteor test-packages  lauricio:less-autoprefixer
+```
+
+## Dependencies
 
 This package uses the following npm modules:
 
