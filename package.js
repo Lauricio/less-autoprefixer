@@ -2,7 +2,8 @@ Package.describe({
   name: 'lauricio:less-autoprefixer',
   version: '2.5.0_3',
   summary: 'Leaner CSS language + Autoprefixer',
-  documentation: 'README.md'
+  documentation: 'README.md',
+  git: 'https://github.com/Lauricio/less-autoprefixer'
 });
 
 Package.registerBuildPlugin({
