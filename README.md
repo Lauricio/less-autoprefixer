@@ -3,6 +3,11 @@
 This is a hacked meteor core `less` package extended to support  [AutoPrefixer](https://github.com/ai/autoprefixer) via `less-plugin-autoprefix`. It provides a compiler build plugin for the Meteor build tool. It
 handles the compilation of `*.less` files to CSS and automatically applies vendor prefixes.
 
+## Version history
+### v2.5.0_3
+- Meteor 1.2.0 support
+- New autoprefixer test
+
 ## Usage
 
 If you want to use it in your app, just run:
