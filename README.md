@@ -5,7 +5,7 @@ handles the compilation of `*.less` files to CSS and automatically applies vendo
 
 ## Version history
 ### v2.5.0_3
-- Meteor 1.2.0 support
+- Meteor 1.2.0 support with cross package imports and caching
 - New autoprefixer test
 
 ## Usage
@@ -117,7 +117,7 @@ This package uses the following npm modules:
 - [less-plugin-autoprefix@1.4.2](https://www.npmjs.com/package/less-plugin-autoprefix)
 
 
-### Credits:
+### Contributors:
 [Bass Jobsen](https://github.com/bassjobsen)
 
 ### LICENSE:
