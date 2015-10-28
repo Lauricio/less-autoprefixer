@@ -28,7 +28,7 @@ Package.onUse(function (api) {
 ```
 
 ## Autoprefixer Configuration
-You can pass custom options to `autoprefixer` by setting `AUTOPREFIXER_OPTIONS` environment variable: `export AUTOPREFIXER_OPTIONS='{ "browsers": ["Chrome 36", "iOS 7"]}'`
+You can pass custom options to `autoprefixer` by setting `AUTOPREFIXER_OPTIONS` environment variable: `export AUTOPREFIXER_OPTIONS='{ "browsers": ["Chrome 46", "iOS 9"]}'`
 
 **Important!** When deploying to production `AUTOPREFIXER_OPTIONS` has to be set on the machine where you bundle your project, for example if you are using your *Mac* to deploy to *Modulus.io* you must set the environment variable on you *Mac* then run `modulus deploy`, setting it on modulus website will have no effect.
 
