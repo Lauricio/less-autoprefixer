@@ -1,3 +1,6 @@
+## DEPRECATED
+This package has been deprecated starting **Meteor 1.3** release. Use core `less` package and [juliancwirko:postcss](https://github.com/juliancwirko/meteor-postcss) to get the same functionality.
+
 ## Less + Autoprefixer
 
 This is a hacked meteor core `less` package extended to support  [AutoPrefixer](https://github.com/ai/autoprefixer) via `less-plugin-autoprefix`. It provides a compiler build plugin for the Meteor build tool. It
